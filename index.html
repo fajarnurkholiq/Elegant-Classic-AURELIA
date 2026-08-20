@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title id="page-title">Undangan Pernikahan</title>
+<meta name="description" id="page-desc" content="">
+<meta name="theme-color" content="#F4EFE3">
+
+<!-- Tailwind (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ivory: '#F4EFE3',
+          card: '#FBF8F0',
+          ink: '#24271D',
+          sage: '#67734B',
+          sagedeep: '#454E33',
+          gold: '#B98D4E',
+          goldlight: '#E4CEA0',
+          wine: '#6B2632',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'Georgia', 'serif'],
+          body: ['Manrope', 'Segoe UI', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-parchment font-body text-ink antialiased">
+
+<!-- =========================================================
+     COVER / OPENING SCREEN
+========================================================= -->
+<div id="cover" class="flex flex-col items-center justify-center px-8 text-center">
+  <div class="glass-panel rounded-[28px] px-8 py-10 sm:px-12 sm:py-14 max-w-sm w-full reveal is-visible">
+    <p class="eyebrow mb-5">The Wedding Of</p>
+    <img src="assets/images/monogram.svg" alt="Monogram" class="w-16 h-16 mx-auto mb-5 opacity-90">
+    <h1 class="couple-name text-4xl sm:text-5xl mb-2" id="cover-names">Arka &amp; Raia</h1>
+    <div class="divider-vine my-5"></div>
+    <p class="text-sm text-ink/70 mb-1">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+    <p class="font-display italic text-xl text-sagedeep mb-8" id="cover-guest">Tamu Undangan</p>
+    <button id="open-invitation" type="button" class="seal seal-pulse mx-auto mb-4" aria-label="Buka undangan">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F4EFE3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+    </button>
+    <p class="text-[11px] tracking-[0.2em] uppercase text-ink/50">Ketuk untuk membuka</p>
+  </div>
+</div>
+
+<!-- Floating music control -->
+<button id="music-toggle" type="button" class="music-toggle fixed bottom-5 right-5 z-40 flex items-center justify-center gap-[3px]" aria-label="Putar musik latar" aria-pressed="false">
+  <span class="music-bar h-2" aria-hidden="true"></span>
+  <span class="music-bar h-4" aria-hidden="true"></span>
+  <span class="music-bar h-3" aria-hidden="true"></span>
+</button>
+<audio id="bg-audio" loop preload="none"></audio>
+
+<main id="main-content">
+
+  <!-- =========================================================
+       HERO — asymmetric photo bleed
+  ========================================================= -->
+  <section class="relative min-h-[100svh] flex flex-col justify-end overflow-hidden">
+    <div class="hero-photo-wrap absolute inset-0">
+      <img id="hero-photo" src="" alt="Foto pasangan" class="w-full h-full object-cover">
+      <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(36,39,29,0) 35%, rgba(36,39,29,0.72) 100%);"></div>
+    </div>
+
+    <div class="relative z-10 px-6 sm:px-14 pb-12 sm:pb-16 max-w-3xl">
+      <p class="eyebrow text-goldlight mb-4 reveal is-visible">Menuju hari bahagia kami</p>
+      <h2 class="couple-name text-white text-[3.1rem] leading-[0.95] sm:text-8xl reveal is-visible reveal-delay-1" id="hero-names">Arka<br>&amp; Raia</h2>
+      <p class="mt-5 text-goldlight/90 italic font-display text-lg sm:text-xl max-w-md reveal is-visible reveal-delay-2" id="hero-quote"></p>
+    </div>
+
+    <a href="#countdown" class="relative z-10 mx-6 sm:mx-14 mb-8 flex items-center gap-3 text-goldlight/80 text-xs tracking-[0.25em] uppercase">
+      <span class="w-8 h-px bg-goldlight/60"></span> Gulir ke bawah
+    </a>
+
+    <img src="assets/images/monogram.svg" alt="" class="hero-monogram hidden sm:block" aria-hidden="true">
+  </section>
+
+  <!-- =========================================================
+       COUNTDOWN
+  ========================================================= -->
+  <section id="countdown" class="relative py-20 sm:py-28 px-6 bg-card">
+    <div class="max-w-xl mx-auto text-center reveal">
+      <p class="eyebrow mb-3">Menghitung hari</p>
+      <h3 class="section-title text-3xl sm:text-4xl mb-2" id="countdown-date">14 November 2026</h3>
+      <div class="divider-vine my-6"></div>
+
+      <div class="flex justify-center gap-3 sm:gap-6" id="countdown-boxes">
+        <div class="count-box frame-line rounded-2xl py-4 bg-ivory/70">
+          <div class="count-num text-3xl sm:text-4xl" data-count="days">00</div>
+          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/60 mt-1">Hari</div>
+        </div>
+        <div class="count-box frame-line rounded-2xl py-4 bg-ivory/70">
+          <div class="count-num text-3xl sm:text-4xl" data-count="hours">00</div>
+          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/60 mt-1">Jam</div>
+        </div>
+        <div class="count-box frame-line rounded-2xl py-4 bg-ivory/70">
+          <div class="count-num text-3xl sm:text-4xl" data-count="minutes">00</div>
+          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/60 mt-1">Menit</div>
+        </div>
+        <div class="count-box frame-line rounded-2xl py-4 bg-ivory/70">
+          <div class="count-num text-3xl sm:text-4xl" data-count="seconds">00</div>
+          <div class="text-[10px] tracking-[0.2em] uppercase text-ink/60 mt-1">Detik</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       WEDDING DETAILS — mempelai + rangkaian acara
+  ========================================================= -->
+  <section class="py-20 sm:py-28 px-6 bg-parchment">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="eyebrow mb-3">Kedua mempelai</p>
+        <h3 class="section-title text-3xl sm:text-4xl">Yang Akan Menikah</h3>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-10 sm:gap-6 mb-20">
+        <div class="text-center reveal">
+          <div class="w-40 h-52 sm:w-48 sm:h-60 mx-auto rounded-t-full overflow-hidden frame-line mb-5">
+            <img id="groom-photo" src="" alt="" class="w-full h-full object-cover">
+          </div>
+          <h4 class="couple-name text-3xl mb-1" id="groom-name">Arka</h4>
+          <p class="text-sm text-ink/70 max-w-xs mx-auto" id="groom-parents"></p>
+        </div>
+        <div class="text-center reveal reveal-delay-1">
+          <div class="w-40 h-52 sm:w-48 sm:h-60 mx-auto rounded-t-full overflow-hidden frame-line mb-5">
+            <img id="bride-photo" src="" alt="" class="w-full h-full object-cover">
+          </div>
+          <h4 class="couple-name text-3xl mb-1" id="bride-name">Raia</h4>
+          <p class="text-sm text-ink/70 max-w-xs mx-auto" id="bride-parents"></p>
+        </div>
+      </div>
+
+      <div class="text-center mb-10 reveal">
+        <p class="eyebrow mb-3">Rangkaian acara</p>
+        <h3 class="section-title text-3xl sm:text-4xl">Save The Date</h3>
+      </div>
+
+      <div id="events-list" class="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LOVE STORY
+  ========================================================= -->
+  <section class="py-20 sm:py-28 px-6 bg-card overflow-hidden">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="eyebrow mb-3">Perjalanan kami</p>
+        <h3 class="section-title text-3xl sm:text-4xl">Love Story</h3>
+      </div>
+      <div class="relative" id="story-list"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       GALLERY
+  ========================================================= -->
+  <section class="py-20 sm:py-28 px-6 bg-parchment">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <p class="eyebrow mb-3">Momen kami</p>
+        <h3 class="section-title text-3xl sm:text-4xl">Galeri</h3>
+      </div>
+      <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       RSVP
+  ========================================================= -->
+  <section class="py-20 sm:py-28 px-6 bg-card">
+    <div class="max-w-lg mx-auto">
+      <div class="text-center mb-12 reveal">
+        <p class="eyebrow mb-3">Konfirmasi kehadiran</p>
+        <h3 class="section-title text-3xl sm:text-4xl mb-3">RSVP</h3>
+        <p class="text-sm text-ink/70" id="rsvp-deadline"></p>
+      </div>
+
+      <form id="rsvp-form" class="space-y-7 reveal">
+        <div>
+          <label for="rsvp-name" class="eyebrow block mb-2 text-[10px]">Nama Lengkap</label>
+          <input id="rsvp-name" name="name" type="text" required class="field-input" placeholder="Tulis nama Anda">
+        </div>
+
+        <div>
+          <span class="eyebrow block mb-2 text-[10px]">Konfirmasi Kehadiran</span>
+          <div class="flex flex-wrap gap-3">
+            <label class="chip">
+              <input type="radio" name="attendance" value="Hadir" checked>
+              <span>Hadir</span>
+            </label>
+            <label class="chip">
+              <input type="radio" name="attendance" value="Tidak Bisa Hadir">
+              <span>Tidak bisa hadir</span>
+            </label>
+            <label class="chip">
+              <input type="radio" name="attendance" value="Masih Ragu">
+              <span>Masih ragu</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label for="rsvp-guests" class="eyebrow block mb-2 text-[10px]">Jumlah Tamu</label>
+          <input id="rsvp-guests" name="guests" type="number" min="1" max="10" value="1" class="field-input">
+        </div>
+
+        <div>
+          <label for="rsvp-message" class="eyebrow block mb-2 text-[10px]">Ucapan &amp; Doa</label>
+          <textarea id="rsvp-message" name="message" rows="3" class="field-input resize-none" placeholder="Tulis ucapan untuk kedua mempelai"></textarea>
+        </div>
+
+        <button type="submit" class="btn-gold w-full justify-center">
+          Kirim via WhatsApp
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       GIFT / AMPLOP DIGITAL
+  ========================================================= -->
+  <section class="py-20 sm:py-28 px-6 bg-parchment">
+    <div class="max-w-lg mx-auto text-center">
+      <p class="eyebrow mb-3 reveal">Tanda kasih</p>
+      <h3 class="section-title text-3xl sm:text-4xl mb-5 reveal">Wedding Gift</h3>
+      <p class="text-sm text-ink/70 mb-10 reveal" id="gift-intro"></p>
+
+      <div id="gift-banks" class="space-y-4 mb-10"></div>
+
+      <p class="text-sm text-ink/70 mb-2 reveal" id="gift-address-intro"></p>
+      <p class="text-sm font-medium text-ink reveal" id="gift-address"></p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LOCATION
+  ========================================================= -->
+  <section class="py-20 sm:py-28 px-6 bg-card">
+    <div class="max-w-3xl mx-auto text-center mb-10 reveal">
+      <p class="eyebrow mb-3">Lokasi acara</p>
+      <h3 class="section-title text-3xl sm:text-4xl">Cara Menuju Lokasi</h3>
+    </div>
+    <div class="max-w-3xl mx-auto reveal">
+      <div class="frame-line rounded-2xl overflow-hidden mb-6 aspect-video">
+        <iframe id="location-map" src="" class="w-full h-full" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta lokasi acara"></iframe>
+      </div>
+      <div class="text-center">
+        <a id="location-directions" href="#" target="_blank" rel="noopener" class="btn-outline">
+          Buka di Google Maps
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CLOSING
+  ========================================================= -->
+  <section class="relative py-24 sm:py-32 px-6 bg-parchment text-center overflow-hidden">
+    <div class="max-w-lg mx-auto reveal">
+      <img src="assets/images/monogram.svg" alt="" class="w-14 h-14 mx-auto mb-6 opacity-80">
+      <p class="font-display italic text-lg sm:text-xl leading-relaxed text-ink/85 mb-8" id="closing-text"></p>
+      <p class="eyebrow mb-3" id="closing-signoff">Kami yang berbahagia,</p>
+      <h4 class="couple-name text-4xl sm:text-5xl mb-6" id="closing-names">Arka &amp; Raia</h4>
+      <p class="text-sm tracking-[0.2em] uppercase text-gold" id="closing-hashtag"></p>
+    </div>
+
+    <footer class="mt-20 text-center">
+      <p class="text-[11px] tracking-[0.15em] uppercase text-ink/40">Undangan digital dibuat oleh</p>
+      <p class="text-sm font-semibold text-sagedeep mt-1">KaveloLab</p>
+    </footer>
+  </section>
+
+</main>
+
+<!-- Lightbox for gallery -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/90 px-6" role="dialog" aria-modal="true" aria-label="Pratinjau foto">
+  <button id="lightbox-close" type="button" class="absolute top-6 right-6 text-goldlight" aria-label="Tutup pratinjau">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] rounded-lg frame-line">
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
