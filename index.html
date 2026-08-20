@@ -3,63 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Undangan Pernikahan</title>
+<title>Undangan Pernikahan — Arka & Raia</title>
+<meta name="theme-color" content="#F4EFE3">
+
 <style>
-  :root{--ivory:#F4EFE3; --card:#FBF8F0; --ink:#24271D; --gold:#B98D4E; --gold-line: rgba(185,141,78,.35);}
-  body{margin:0; background:var(--ivory); color:var(--ink); font-family:system-ui,sans-serif;}
-  img{max-width:100%; display:block; background:#eee;}
-  .section{padding:4rem 1.5rem;}
-  .card{background:var(--card); border:1px solid var(--gold-line); border-radius:20px; padding:2rem;}
-  #cover{position:fixed; inset:0; z-index:999; background:var(--ivory); display:flex; align-items:center; justify-content:center; transition:opacity .5s;}
-  #cover.closed{opacity:0; pointer-events:none;}
-  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  :root{
+    --ivory:#F4EFE3; --card:#FBF8F0; --ink:#24271D; --ink-soft:#4A4F3E;
+    --sage:#67734B; --sage-deep:#454E33; --gold:#B98D4E; --gold-light:#E4CEA0; --wine:#6B2632;
+    --gold-line: rgba(185,141,78,.35);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--ivory); color:var(--ink); font-family:'Manrope',system-ui,sans-serif; overflow-x:hidden;}
+  h1,h2,h3,h4{margin:0;}
+  p{margin:0;}
+  img{max-width:100%; display:block;}
+  .serif{font-family:'Fraunces','Georgia',serif; font-style:italic;}
+  .eyebrow{font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--sage-deep); font-weight:700;}
+  .section{padding:5rem 1.5rem;}
+  @media(min-width:700px){.section{padding:6rem 2rem;}}
+  .max-w{max-width:960px; margin:0 auto;}
+  .max-w-sm{max-width:640px; margin:0 auto;}
+  .card{background:var(--card); border:1px solid var(--gold-line); border-radius:20px;}
+  .center{text-align:center;}
+  .divider{width:110px; height:20px; margin:1.4rem auto; opacity:.9;}
+  .btn{display:inline-flex; align-items:center; gap:.5rem; background:var(--ink); color:var(--gold-light);
+    font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; padding:.9rem 1.9rem;
+    border-radius:999px; border:1px solid var(--ink); cursor:pointer; text-decoration:none;}
+  .btn:hover{background:var(--sage-deep); border-color:var(--sage-deep);}
+  .btn-outline{display:inline-flex; align-items:center; gap:.5rem; background:transparent; color:var(--ink);
+    font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; padding:.85rem 1.8rem;
+    border-radius:999px; border:1px solid var(--gold); cursor:pointer; text-decoration:none;}
+  .btn-outline:hover{background:var(--gold); color:#fff;}
+
+  #cover{position:fixed; inset:0; z-index:60; background:var(--ivory);
+    display:flex; align-items:center; justify-content:center; padding:1.5rem;
+    transition:opacity .9s ease, visibility .9s ease;}
+  #cover.closed{opacity:0; visibility:hidden; pointer-events:none;}
+  .seal{width:80px; height:80px; border-radius:50%; margin:0 auto;
+    background:radial-gradient(circle at 32% 28%, #cf9f5f, var(--gold) 55%, #8f6a35 100%);
+    box-shadow:0 8px 20px rgba(107,42,50,.25); border:none; display:flex; align-items:center; justify-content:center;
+    cursor:pointer;}
+  .seal:active{transform:scale(.95);}
+
+  .hero{position:relative; min-height:100svh; display:flex; align-items:flex-end;}
+  .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .hero::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(36,39,29,0) 30%, rgba(36,39,29,.75) 100%);}
+  .hero-content{position:relative; z-index:2; padding:3rem 1.5rem; max-width:640px;}
+  @media(min-width:700px){.hero-content{padding:4rem;}}
+  .hero-content h2{color:#fff; font-size:3rem; line-height:.95;}
+  @media(min-width:700px){.hero-content h2{font-size:5rem;}}
+
+  .count-row{display:flex; justify-content:center; gap:.7rem; flex-wrap:wrap;}
+  .count-box{min-width:70px; padding:1rem 0; text-align:center; border-radius:16px; border:1px solid var(--gold-line); background:var(--ivory);}
+  .count-num{font-family:'Fraunces',serif; font-weight:700; font-size:1.9rem;}
+  .count-label{font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;}
+
+  .couple-grid{display:grid; gap:2.5rem; margin-bottom:3.5rem;}
+  @media(min-width:700px){.couple-grid{grid-template-columns:1fr 1fr;}}
+  .couple-photo{width:170px; height:220px; margin:0 auto 1.2rem; border-radius:0 0 999px 999px; overflow:hidden; border:1px solid var(--gold-line);}
+  .couple-photo img{width:100%; height:100%; object-fit:cover;}
+
+  .events-grid{display:grid; gap:1.5rem; max-width:640px; margin:0 auto;}
+  @media(min-width:600px){.events-grid{grid-template-columns:1fr 1fr;}}
+  .event-card{padding:1.6rem; text-align:left;}
+  .hairline{height:1px; background:linear-gradient(90deg,transparent,var(--gold-line),transparent); margin:1rem 0;}
+
+  .story-item{display:grid; gap:1rem; margin-bottom:2.5rem; align-items:center;}
+  @media(min-width:700px){.story-item{grid-template-columns:200px 1fr; gap:2rem;}}
+  .story-photo{width:100%; max-width:200px; aspect-ratio:4/5; border-radius:16px; overflow:hidden; border:1px solid var(--gold-line); margin:0 auto;}
+  .story-photo img{width:100%; height:100%; object-fit:cover;}
+
+  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem;}
+  .gallery-grid img{aspect-ratio:1/1; object-fit:cover; border-radius:12px; cursor:pointer;}
+
+  .field{margin-bottom:1.5rem; text-align:left;}
+  .field label{display:block; margin-bottom:.4rem;}
+  .field input[type=text], .field input[type=number], .field textarea{
+    width:100%; border:none; border-bottom:1px solid var(--gold-line); background:transparent;
+    font-family:inherit; font-size:1rem; color:var(--ink); padding:.5rem .1rem;}
+  .field input:focus, .field textarea:focus{outline:none; border-bottom-color:var(--gold);}
+  .chips{display:flex; gap:.6rem; flex-wrap:wrap;}
+  .chip span{display:block; border:1px solid var(--gold-line); border-radius:999px; padding:.5rem 1rem; font-size:.82rem; cursor:pointer;}
+  .chip input{display:none;}
+  .chip input:checked + span{background:var(--ink); color:var(--gold-light); border-color:var(--ink);}
+
+  .bank-card{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.3rem; text-align:left; margin-bottom:1rem;}
+  .copy-btn{font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; border:1px solid var(--gold); border-radius:999px; padding:.5rem 1rem; background:transparent; cursor:pointer;}
+  .copy-btn.copied{color:var(--sage); border-color:var(--sage);}
+
+  #music-btn{position:fixed; bottom:1.2rem; right:1.2rem; z-index:40; width:50px; height:50px; border-radius:50%;
+    background:var(--card); border:1px solid var(--gold-line); box-shadow:0 6px 16px rgba(36,39,29,.15);
+    display:flex; align-items:center; justify-content:center; gap:3px; cursor:pointer;}
+  .bar{width:3px; background:var(--gold); border-radius:2px;}
+  #music-btn.playing .bar{animation:wave .9s ease-in-out infinite;}
+  .bar:nth-child(1){height:8px;} .bar:nth-child(2){height:16px; animation-delay:.15s;} .bar:nth-child(3){height:12px; animation-delay:.3s;}
+  @keyframes wave{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+
+  #lightbox{position:fixed; inset:0; z-index:50; background:rgba(36,39,29,.92); display:none; align-items:center; justify-content:center; padding:1.5rem;}
+  #lightbox.open{display:flex;}
+  #lightbox img{max-height:80vh; border-radius:12px;}
+  #lightbox-close{position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:var(--gold-light); font-size:1.8rem; cursor:pointer;}
+
+  footer{text-align:center; padding:2.5rem 1.5rem 3.5rem;}
 </style>
 </head>
 <body>
 
-<div id="cover"><button onclick="openInvitation()">Buka Undangan</button></div>
-
-<main>
-  <section class="section"><img id="hero-photo" src="" alt="Hero"></section>
-  <section class="section" id="events-list"></section>
-  <section class="section"><div class="gallery-grid" id="gallery-grid"></div></section>
-</main>
+<div id="cover">
+  <div class="card center" style="padding:3rem 2rem; max-width:380px; width:100%;">
+    <p class="eyebrow">The Wedding Of</p>
+    <h1 class="serif" style="font-size:2.6rem; margin:1rem 0;">A &amp; R</h1>
+    <div class="hairline"></div>
+    <p style="font-size:.9rem; color:var(--ink-soft); margin-top:1.2rem;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+    <p class="serif" style="font-size:1.2rem; color:var(--sage-deep); margin:.3rem 0 2rem;" id="guest-name">Tamu Undangan</p>
+    <button type="button" class="seal" onclick="openInvitation()" aria-label="Buka undangan">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+    </button>
+    <p style="font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); margin-top:.9rem;">Ketuk untuk membuka</p>
+  </div>
+</div>
 
 <script>
-// EDIT DATA DI SINI
+  function openInvitation(){
+    document.getElementById('cover').classList.add('closed');
+    document.body.style.overflow = '';
+    var audio = document.getElementById('bg-audio');
+    if(audio) audio.play().then(() => document.getElementById('music-btn').classList.add('playing')).catch(()=>{});
+  }
+  document.body.style.overflow = 'hidden';
+  function toggleMusic(){
+    var audio = document.getElementById('bg-audio');
+    var btn = document.getElementById('music-btn');
+    if(audio.paused){ audio.play(); btn.classList.add('playing'); } 
+    else { audio.pause(); btn.classList.remove('playing'); }
+  }
+  try {
+    var to = new URLSearchParams(window.location.search).get('to');
+    if(to) document.getElementById('guest-name').textContent = decodeURIComponent(to);
+  } catch(e){}
+</script>
+
+<button type="button" id="music-btn" onclick="toggleMusic()"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+<audio id="bg-audio" loop preload="none"></audio>
+
+<main>
+  <section class="hero"><img id="hero-photo" alt="Foto pasangan">
+    <div class="hero-content">
+      <p class="eyebrow" style="color:var(--gold-light);">Menuju hari bahagia kami</p>
+      <h2 class="serif" id="hero-names">Arka<br>&amp; Raia</h2>
+      <p class="serif" id="hero-quote" style="color:var(--gold-light); font-size:1.05rem; margin-top:1rem;"></p>
+    </div>
+  </section>
+
+  <section class="section card" style="margin:0; border-radius:0;">
+    <div class="max-w-sm center">
+      <p class="eyebrow">Menghitung hari</p>
+      <h3 class="serif" id="countdown-date" style="font-size:1.9rem; margin:.6rem 0;"></h3>
+      <div class="count-row">
+        <div class="count-box"><div class="count-num" id="c-days">00</div><div class="count-label">Hari</div></div>
+        <div class="count-box"><div class="count-num" id="c-hours">00</div><div class="count-label">Jam</div></div>
+        <div class="count-box"><div class="count-num" id="c-minutes">00</div><div class="count-label">Menit</div></div>
+        <div class="count-box"><div class="count-num" id="c-seconds">00</div><div class="count-label">Detik</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="max-w">
+      <div class="couple-grid">
+        <div class="center"><div class="couple-photo"><img id="groom-photo" alt="Pria"></div><h4 class="serif" id="groom-name"></h4><p id="groom-parents"></p></div>
+        <div class="center"><div class="couple-photo"><img id="bride-photo" alt="Wanita"></div><h4 class="serif" id="bride-name"></h4><p id="bride-parents"></p></div>
+      </div>
+      <div class="events-grid" id="events-list"></div>
+    </div>
+  </section>
+
+  <section class="section card" style="margin:0; border-radius:0;">
+    <div class="max-w-sm"><div id="story-list"></div></div>
+  </section>
+
+  <section class="section">
+    <div class="max-w"><div class="gallery-grid" id="gallery-grid"></div></div>
+  </section>
+
+  <section class="section card" style="margin:0; border-radius:0;">
+    <div class="max-w-sm">
+      <form id="rsvp-form" onsubmit="return sendRsvp(event)">
+        <div class="field"><label>Nama</label><input type="text" id="rsvp-name" required></div>
+        <button type="submit" class="btn">Kirim via WA</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div id="lightbox"><button id="lightbox-close" onclick="closeLightbox()">&times;</button><img id="lightbox-img"></div>
+
+<script>
 var DATA = {
-  fotoHero: "hero.jpg",
-  acara: [
-    { nama: "Akad", tanggal: "14 Nov 2026", tempat: "Cirebon" }
-  ],
-  galeri: ["g1.jpg", "g2.jpg", "g3.jpg"],
+  // GANTI NAMA FILE SESUAI NAMA FILE DI REPO MU
+  fotoPria: "pria.webp",
+  fotoWanita: "wanita.webp",
+  fotoHero: "hero.webp",
+  tanggalCountdown: "2026-11-14T08:00:00+07:00",
+  acara: [{ nama: "Akad", tanggal: "14 Nov", jam: "08.00", tempat: "Cirebon", alamat: "Jl. Melati", linkMaps: "#" }],
+  ceritaCinta: [{ tahun:"2019", judul:"Awal", teks:"...", foto:"cerita1.webp" }],
+  galeri: ["g1.webp", "g2.webp", "g3.webp"],
   nomorWhatsapp: "6282121759018"
 };
 
-// LOGIKA REVISI
-function openInvitation(){
-  document.getElementById('cover').classList.add('closed');
-}
-
-function init() {
+// HELPER RENDER (Otomatis tambahkan loading="lazy")
+function render(){
   document.getElementById('hero-photo').src = DATA.fotoHero;
   document.getElementById('hero-photo').loading = "lazy";
+  document.getElementById('groom-photo').src = DATA.fotoPria;
+  document.getElementById('groom-photo').loading = "lazy";
+  document.getElementById('bride-photo').src = DATA.fotoWanita;
+  document.getElementById('bride-photo').loading = "lazy";
+  
+  document.getElementById('gallery-grid').innerHTML = DATA.galeri.map(src => `<img src="${src}" loading="lazy" onclick="openLightbox('${src}')">`).join('');
+}
+render();
 
-  document.getElementById('events-list').innerHTML = DATA.acara.map(e => `
-    <div class="card">
-      <h3>${e.nama}</h3>
-      <p>${e.tanggal}</p>
-      <p>${e.tempat}</p>
-    </div>
-  `).join('');
-
-  document.getElementById('gallery-grid').innerHTML = DATA.galeri.map(src => `
-    <img src="${src}" loading="lazy" alt="Gallery">
-  `).join('');
+function sendRsvp(e){
+  e.preventDefault();
+  var nama = document.getElementById('rsvp-name').value;
+  window.location.href = 'https://wa.me/'+DATA.nomorWhatsapp+'?text=Hadir, nama: '+nama;
+  return false;
 }
 
-init();
+function openLightbox(src){ document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').classList.add('open'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
 </script>
 </body>
 </html>
-```
