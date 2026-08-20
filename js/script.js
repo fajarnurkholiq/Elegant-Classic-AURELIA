@@ -192,7 +192,6 @@
       cover.classList.add("is-closed");
       document.body.style.overflow = "";
       tryAutoStartMusic();
-      revealInitial();
     }, { once: true });
     document.body.style.overflow = "hidden";
   }
@@ -308,31 +307,35 @@
 
   /* =====================================================================
      7. SCROLL REVEAL
+     (observer dibuat sekarang juga — di top-level, bukan di dalam fungsi
+     yang baru jalan belakangan — supaya fungsi render yang lebih dulu
+     dipanggil tidak error saat memanggil observeReveals())
   ===================================================================== */
-  let observer;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
   function observeReveals(scope) {
     $all(".reveal", scope).forEach((el) => observer.observe(el));
   }
   function initReveal() {
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
     observeReveals(document);
-  }
-  function revealInitial() {
-    // Section pertama (di dalam cover) sudah is-visible secara default lewat class HTML.
   }
 
   /* =====================================================================
      INIT
   ===================================================================== */
   document.addEventListener("DOMContentLoaded", () => {
-    renderAll();
+    try {
+      renderAll();
+    } catch (err) {
+      console.error("Gagal merender data undangan:", err);
+    }
     initCover();
     initCountdown();
     initMusic();
