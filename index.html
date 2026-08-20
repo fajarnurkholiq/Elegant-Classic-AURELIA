@@ -36,6 +36,7 @@
     border-radius:999px; border:1px solid var(--gold); cursor:pointer; text-decoration:none;}
   .btn-outline:hover{background:var(--gold); color:#fff;}
 
+  /* ---------- COVER ---------- */
   #cover{position:fixed; inset:0; z-index:60; background:var(--ivory);
     display:flex; align-items:center; justify-content:center; padding:1.5rem;
     transition:opacity .9s ease, visibility .9s ease;}
@@ -46,6 +47,7 @@
     cursor:pointer;}
   .seal:active{transform:scale(.95);}
 
+  /* ---------- HERO ---------- */
   .hero{position:relative; min-height:100svh; display:flex; align-items:flex-end;}
   .hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
   .hero::after{content:""; position:absolute; inset:0;
@@ -55,11 +57,13 @@
   .hero-content h2{color:#fff; font-size:3rem; line-height:.95;}
   @media(min-width:700px){.hero-content h2{font-size:5rem;}}
 
+  /* ---------- COUNTDOWN ---------- */
   .count-row{display:flex; justify-content:center; gap:.7rem; flex-wrap:wrap;}
   .count-box{min-width:70px; padding:1rem 0; text-align:center; border-radius:16px; border:1px solid var(--gold-line); background:var(--ivory);}
   .count-num{font-family:'Fraunces',serif; font-weight:700; font-size:1.9rem;}
   .count-label{font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem;}
 
+  /* ---------- COUPLE ---------- */
   .couple-grid{display:grid; gap:2.5rem; margin-bottom:3.5rem;}
   @media(min-width:700px){.couple-grid{grid-template-columns:1fr 1fr;}}
   .couple-photo{width:170px; height:220px; margin:0 auto 1.2rem; border-radius:0 0 999px 999px; overflow:hidden; border:1px solid var(--gold-line);}
@@ -70,14 +74,17 @@
   .event-card{padding:1.6rem; text-align:left;}
   .hairline{height:1px; background:linear-gradient(90deg,transparent,var(--gold-line),transparent); margin:1rem 0;}
 
+  /* ---------- LOVE STORY ---------- */
   .story-item{display:grid; gap:1rem; margin-bottom:2.5rem; align-items:center;}
   @media(min-width:700px){.story-item{grid-template-columns:200px 1fr; gap:2rem;}}
   .story-photo{width:100%; max-width:200px; aspect-ratio:4/5; border-radius:16px; overflow:hidden; border:1px solid var(--gold-line); margin:0 auto;}
   .story-photo img{width:100%; height:100%; object-fit:cover;}
 
+  /* ---------- GALLERY ---------- */
   .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem;}
   .gallery-grid img{aspect-ratio:1/1; object-fit:cover; border-radius:12px; cursor:pointer;}
 
+  /* ---------- RSVP ---------- */
   .field{margin-bottom:1.5rem; text-align:left;}
   .field label{display:block; margin-bottom:.4rem;}
   .field input[type=text], .field input[type=number], .field textarea{
@@ -89,10 +96,12 @@
   .chip input{display:none;}
   .chip input:checked + span{background:var(--ink); color:var(--gold-light); border-color:var(--ink);}
 
+  /* ---------- GIFT ---------- */
   .bank-card{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.3rem; text-align:left; margin-bottom:1rem;}
   .copy-btn{font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; border:1px solid var(--gold); border-radius:999px; padding:.5rem 1rem; background:transparent; cursor:pointer;}
   .copy-btn.copied{color:var(--sage); border-color:var(--sage);}
 
+  /* ---------- MUSIC BUTTON ---------- */
   #music-btn{position:fixed; bottom:1.2rem; right:1.2rem; z-index:40; width:50px; height:50px; border-radius:50%;
     background:var(--card); border:1px solid var(--gold-line); box-shadow:0 6px 16px rgba(36,39,29,.15);
     display:flex; align-items:center; justify-content:center; gap:3px; cursor:pointer;}
@@ -101,6 +110,7 @@
   .bar:nth-child(1){height:8px;} .bar:nth-child(2){height:16px; animation-delay:.15s;} .bar:nth-child(3){height:12px; animation-delay:.3s;}
   @keyframes wave{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
 
+  /* ---------- LIGHTBOX ---------- */
   #lightbox{position:fixed; inset:0; z-index:50; background:rgba(36,39,29,.92); display:none; align-items:center; justify-content:center; padding:1.5rem;}
   #lightbox.open{display:flex;}
   #lightbox img{max-height:80vh; border-radius:12px;}
@@ -111,6 +121,9 @@
 </head>
 <body>
 
+<!-- =====================================================
+     COVER — tombol pakai onclick langsung supaya PASTI jalan
+===================================================== -->
 <div id="cover">
   <div class="card center" style="padding:3rem 2rem; max-width:380px; width:100%;">
     <p class="eyebrow">The Wedding Of</p>
@@ -118,6 +131,7 @@
     <div class="hairline"></div>
     <p style="font-size:.9rem; color:var(--ink-soft); margin-top:1.2rem;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
     <p class="serif" style="font-size:1.2rem; color:var(--sage-deep); margin:.3rem 0 2rem;" id="guest-name">Tamu Undangan</p>
+
     <button type="button" class="seal" onclick="openInvitation()" aria-label="Buka undangan">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4EFE3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
     </button>
@@ -125,42 +139,65 @@
   </div>
 </div>
 
+<!-- Script kecil ini SENGAJA dipisah dan ditaruh paling awal,
+     supaya tombol buka undangan & tombol musik PASTI berfungsi
+     walaupun ada bagian lain di bawah yang error. -->
 <script>
   function openInvitation(){
     document.getElementById('cover').classList.add('closed');
     document.body.style.overflow = '';
-    var audio = document.getElementById('bg-audio');
-    if(audio) audio.play().then(() => document.getElementById('music-btn').classList.add('playing')).catch(()=>{});
+    tryPlayMusic();
   }
   document.body.style.overflow = 'hidden';
+
+  function tryPlayMusic(){
+    var audio = document.getElementById('bg-audio');
+    if(!audio || !audio.src) return;
+    audio.play().then(function(){
+      document.getElementById('music-btn').classList.add('playing');
+    }).catch(function(){ /* browser blokir autoplay, tamu bisa tap tombol musik */ });
+  }
   function toggleMusic(){
     var audio = document.getElementById('bg-audio');
     var btn = document.getElementById('music-btn');
-    if(audio.paused){ audio.play(); btn.classList.add('playing'); } 
-    else { audio.pause(); btn.classList.remove('playing'); }
+    if(!audio || !audio.src) return;
+    if(audio.paused){
+      audio.play().then(function(){ btn.classList.add('playing'); }).catch(function(){});
+    } else {
+      audio.pause();
+      btn.classList.remove('playing');
+    }
   }
-  try {
-    var to = new URLSearchParams(window.location.search).get('to');
-    if(to) document.getElementById('guest-name').textContent = decodeURIComponent(to);
-  } catch(e){}
+  try{
+    var params = new URLSearchParams(window.location.search);
+    var to = params.get('to');
+    if(to){ document.getElementById('guest-name').textContent = decodeURIComponent(to); }
+  }catch(e){}
 </script>
 
-<button type="button" id="music-btn" onclick="toggleMusic()"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+<button type="button" id="music-btn" onclick="toggleMusic()" aria-label="Putar musik latar">
+  <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+</button>
 <audio id="bg-audio" loop preload="none"></audio>
 
 <main>
-  <section class="hero"><img id="hero-photo" alt="Foto pasangan">
+
+  <!-- HERO -->
+  <section class="hero">
+    <img id="hero-photo" alt="Foto pasangan">
     <div class="hero-content">
       <p class="eyebrow" style="color:var(--gold-light);">Menuju hari bahagia kami</p>
-      <h2 class="serif" id="hero-names">Arka<br>&amp; Raia</h2>
-      <p class="serif" id="hero-quote" style="color:var(--gold-light); font-size:1.05rem; margin-top:1rem;"></p>
+      <h2 class="serif" id="hero-names" style="margin-top:.6rem;">Arka<br>&amp; Raia</h2>
+      <p class="serif" id="hero-quote" style="color:var(--gold-light); font-size:1.05rem; margin-top:1rem; max-width:380px;"></p>
     </div>
   </section>
 
+  <!-- COUNTDOWN -->
   <section class="section card" style="margin:0; border-radius:0;">
     <div class="max-w-sm center">
       <p class="eyebrow">Menghitung hari</p>
       <h3 class="serif" id="countdown-date" style="font-size:1.9rem; margin:.6rem 0;"></h3>
+      <div class="divider"><svg width="110" height="20" viewBox="0 0 110 20"><path d="M0,10 C25,0 35,20 55,10 C75,0 85,20 110,10" fill="none" stroke="#B98D4E" stroke-width="1.4"/></svg></div>
       <div class="count-row">
         <div class="count-box"><div class="count-num" id="c-days">00</div><div class="count-label">Hari</div></div>
         <div class="count-box"><div class="count-num" id="c-hours">00</div><div class="count-label">Jam</div></div>
@@ -170,71 +207,390 @@
     </div>
   </section>
 
+  <!-- WEDDING DETAILS -->
   <section class="section">
     <div class="max-w">
+      <div class="center" style="margin-bottom:2.5rem;">
+        <p class="eyebrow">Kedua mempelai</p>
+        <h3 class="serif" style="font-size:2rem; margin-top:.5rem;">Yang Akan Menikah</h3>
+      </div>
       <div class="couple-grid">
-        <div class="center"><div class="couple-photo"><img id="groom-photo" alt="Pria"></div><h4 class="serif" id="groom-name"></h4><p id="groom-parents"></p></div>
-        <div class="center"><div class="couple-photo"><img id="bride-photo" alt="Wanita"></div><h4 class="serif" id="bride-name"></h4><p id="bride-parents"></p></div>
+        <div class="center">
+          <div class="couple-photo"><img id="groom-photo" alt="Mempelai pria"></div>
+          <h4 class="serif" style="font-size:1.7rem;" id="groom-name"></h4>
+          <p style="font-size:.85rem; color:var(--ink-soft); max-width:280px; margin:.4rem auto 0;" id="groom-parents"></p>
+        </div>
+        <div class="center">
+          <div class="couple-photo"><img id="bride-photo" alt="Mempelai wanita"></div>
+          <h4 class="serif" style="font-size:1.7rem;" id="bride-name"></h4>
+          <p style="font-size:.85rem; color:var(--ink-soft); max-width:280px; margin:.4rem auto 0;" id="bride-parents"></p>
+        </div>
+      </div>
+
+      <div class="center" style="margin-bottom:2rem;">
+        <p class="eyebrow">Rangkaian acara</p>
+        <h3 class="serif" style="font-size:2rem; margin-top:.5rem;">Save The Date</h3>
       </div>
       <div class="events-grid" id="events-list"></div>
     </div>
   </section>
 
-  <section class="section card" style="margin:0; border-radius:0;">
-    <div class="max-w-sm"><div id="story-list"></div></div>
-  </section>
-
-  <section class="section">
-    <div class="max-w"><div class="gallery-grid" id="gallery-grid"></div></div>
-  </section>
-
+  <!-- LOVE STORY -->
   <section class="section card" style="margin:0; border-radius:0;">
     <div class="max-w-sm">
+      <div class="center" style="margin-bottom:2.5rem;">
+        <p class="eyebrow">Perjalanan kami</p>
+        <h3 class="serif" style="font-size:2rem; margin-top:.5rem;">Love Story</h3>
+      </div>
+      <div id="story-list"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section">
+    <div class="max-w">
+      <div class="center" style="margin-bottom:2.2rem;">
+        <p class="eyebrow">Momen kami</p>
+        <h3 class="serif" style="font-size:2rem; margin-top:.5rem;">Galeri</h3>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section card" style="margin:0; border-radius:0;">
+    <div class="max-w-sm">
+      <div class="center" style="margin-bottom:2rem;">
+        <p class="eyebrow">Konfirmasi kehadiran</p>
+        <h3 class="serif" style="font-size:2rem; margin:.5rem 0;">RSVP</h3>
+        <p style="font-size:.85rem; color:var(--ink-soft);" id="rsvp-deadline"></p>
+      </div>
       <form id="rsvp-form" onsubmit="return sendRsvp(event)">
-        <div class="field"><label>Nama</label><input type="text" id="rsvp-name" required></div>
-        <button type="submit" class="btn">Kirim via WA</button>
+        <div class="field">
+          <label class="eyebrow" style="font-size:.62rem;">Nama Lengkap</label>
+          <input type="text" id="rsvp-name" required placeholder="Tulis nama Anda">
+        </div>
+        <div class="field">
+          <label class="eyebrow" style="font-size:.62rem;">Konfirmasi Kehadiran</label>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="attendance" value="Hadir" checked><span>Hadir</span></label>
+            <label class="chip"><input type="radio" name="attendance" value="Tidak Bisa Hadir"><span>Tidak bisa hadir</span></label>
+            <label class="chip"><input type="radio" name="attendance" value="Masih Ragu"><span>Masih ragu</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="eyebrow" style="font-size:.62rem;">Jumlah Tamu</label>
+          <input type="number" id="rsvp-guests" min="1" max="10" value="1">
+        </div>
+        <div class="field">
+          <label class="eyebrow" style="font-size:.62rem;">Ucapan &amp; Doa</label>
+          <textarea id="rsvp-message" rows="3" placeholder="Tulis ucapan untuk kedua mempelai"></textarea>
+        </div>
+        <button type="submit" class="btn" style="width:100%; justify-content:center;">Kirim via WhatsApp</button>
       </form>
     </div>
   </section>
+
+  <!-- GIFT -->
+  <section class="section">
+    <div class="max-w-sm center">
+      <p class="eyebrow">Tanda kasih</p>
+      <h3 class="serif" style="font-size:2rem; margin:.5rem 0 1.2rem;">Wedding Gift</h3>
+      <p style="font-size:.88rem; color:var(--ink-soft); margin-bottom:2rem;" id="gift-intro"></p>
+      <div id="gift-banks"></div>
+      <p style="font-size:.85rem; color:var(--ink-soft); margin-top:1.5rem;" id="gift-address-intro"></p>
+      <p style="font-size:.9rem; font-weight:600;" id="gift-address"></p>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="section card" style="margin:0; border-radius:0;">
+    <div class="max-w-sm">
+      <div class="center" style="margin-bottom:1.6rem;">
+        <p class="eyebrow">Lokasi acara</p>
+        <h3 class="serif" style="font-size:2rem; margin-top:.5rem;">Cara Menuju Lokasi</h3>
+      </div>
+      <div style="border-radius:16px; overflow:hidden; border:1px solid var(--gold-line); aspect-ratio:16/9; margin-bottom:1.5rem;">
+        <iframe id="location-map" style="width:100%; height:100%; border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta lokasi acara"></iframe>
+      </div>
+      <div class="center">
+        <a id="location-directions" href="#" target="_blank" rel="noopener" class="btn-outline">Buka di Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="section center">
+    <div class="max-w-sm">
+      <p class="serif" style="font-size:1.1rem; line-height:1.7; color:var(--ink-soft); margin-bottom:1.6rem;" id="closing-text"></p>
+      <p class="eyebrow" id="closing-signoff"></p>
+      <h4 class="serif" style="font-size:2.2rem; margin:.6rem 0;" id="closing-names"></h4>
+      <p style="font-size:.85rem; letter-spacing:.15em; text-transform:uppercase; color:var(--gold);" id="closing-hashtag"></p>
+    </div>
+    <footer>
+      <p style="font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(36,39,29,.4);">Undangan digital dibuat oleh</p>
+      <p style="font-size:.9rem; font-weight:700; color:var(--sage-deep); margin-top:.2rem;">KaveloLab</p>
+    </footer>
+  </section>
+
 </main>
 
-<div id="lightbox"><button id="lightbox-close" onclick="closeLightbox()">&times;</button><img id="lightbox-img"></div>
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">&times;</button>
+  <img id="lightbox-img" alt="Pratinjau foto">
+</div>
 
+<!-- =====================================================================
+     DATA UNDANGAN — INI SATU-SATUNYA BAGIAN YANG PERLU KAMU EDIT.
+     Ganti tulisan di antara tanda kutip " " sesuai kebutuhan.
+     UNTUK FOTO: paling gampang, upload foto ke Google Drive / Imgur /
+     Google Photos, ambil "link yang bisa dibagikan", tempel di sini
+     menggantikan link placeholder yang sudah ada.
+====================================================================== -->
 <script>
+try {
+
 var DATA = {
-  // GANTI NAMA FILE SESUAI NAMA FILE DI REPO MU
-  fotoPria: "pria.webp",
-  fotoWanita: "wanita.webp",
-  fotoHero: "hero.webp",
+  namaPria: "Arka Wicaksana Putra",
+  panggilanPria: "Arka",
+  ortuPria: "Putra kedua dari Bapak Wirawan Putra & Ibu Sulistyani",
+  fotoPria: "https://placehold.co/700x900/F4EFE3/67734B?text=Foto+Mempelai+Pria",
+
+  namaWanita: "Raia Anindya Kirana",
+  panggilanWanita: "Raia",
+  ortuWanita: "Putri pertama dari Bapak Handoko Kirana & Ibu Maya Anindita",
+  fotoWanita: "https://placehold.co/700x900/F4EFE3/6B2632?text=Foto+Mempelai+Wanita",
+
+  fotoHero: "https://placehold.co/900x1125/24271D/E4CEA0?text=Foto+Utama+Pasangan",
+  kutipanHero: "Dua hati, satu langkah menuju rumah yang sama.",
+
+  // Format wajib: "YYYY-MM-DDTHH:mm:ss+07:00"
   tanggalCountdown: "2026-11-14T08:00:00+07:00",
-  acara: [{ nama: "Akad", tanggal: "14 Nov", jam: "08.00", tempat: "Cirebon", alamat: "Jl. Melati", linkMaps: "#" }],
-  ceritaCinta: [{ tahun:"2019", judul:"Awal", teks:"...", foto:"cerita1.webp" }],
-  galeri: ["g1.webp", "g2.webp", "g3.webp"],
-  nomorWhatsapp: "6282121759018"
+
+  acara: [
+    {
+      nama: "Akad Nikah",
+      tanggal: "Sabtu, 14 November 2026",
+      jam: "08.00 — 10.00 WIB",
+      tempat: "Kediaman Mempelai Wanita",
+      alamat: "Jl. Melati Raya No. 21, Cirebon, Jawa Barat",
+      linkMaps: "https://maps.google.com/?q=Cirebon"
+    },
+    {
+      nama: "Resepsi",
+      tanggal: "Sabtu, 14 November 2026",
+      jam: "11.00 — 14.00 WIB",
+      tempat: "Grand Ballroom, Hotel Aston Cirebon",
+      alamat: "Jl. Brigjen Dharsono No. 12, Cirebon, Jawa Barat",
+      linkMaps: "https://maps.google.com/?q=Aston+Cirebon"
+    }
+  ],
+
+  embedPeta: "https://maps.google.com/maps?q=Cirebon&t=&z=14&ie=UTF8&iwloc=&output=embed",
+  linkPetaTombol: "https://maps.google.com/?q=Aston+Cirebon",
+
+  ceritaCinta: [
+    { tahun:"2019", judul:"Awal Bertemu", teks:"Dipertemukan di sebuah acara kampus yang sama sekali tidak direncanakan.", foto:"https://placehold.co/800x1000/F4EFE3/B98D4E?text=Love+Story+1" },
+    { tahun:"2022", judul:"Menjalin Kasih", teks:"Melalui suka duka dan banyak percakapan panjang, kami memutuskan saling memilih setiap hari.", foto:"https://placehold.co/800x1000/F4EFE3/67734B?text=Love+Story+2" },
+    { tahun:"2026", judul:"Melamar", teks:"Di tempat penuh kenangan, satu pertanyaan diajukan — dan jawabannya adalah ya, untuk selamanya.", foto:"https://placehold.co/800x1000/F4EFE3/6B2632?text=Love+Story+3" }
+  ],
+
+  galeri: [
+    "https://placehold.co/800x800/F4EFE3/B98D4E?text=Galeri+1",
+    "https://placehold.co/800x800/F4EFE3/67734B?text=Galeri+2",
+    "https://placehold.co/800x800/F4EFE3/6B2632?text=Galeri+3",
+    "https://placehold.co/800x800/F4EFE3/B98D4E?text=Galeri+4",
+    "https://placehold.co/800x800/F4EFE3/67734B?text=Galeri+5",
+    "https://placehold.co/800x800/F4EFE3/6B2632?text=Galeri+6"
+  ],
+
+  // format 62xxxxxxxxxx, tanpa + atau 0 di depan
+  nomorWhatsapp: "6282121759018",
+  batasRsvp: "7 November 2026",
+
+  giftIntro: "Doa restu Anda adalah hadiah yang paling berarti bagi kami. Namun jika ingin memberi tanda kasih, kami dengan senang hati menerimanya melalui:",
+  rekening: [
+    { bank:"Bank BCA", nomor:"1234567890", nama:"Arka Wicaksana Putra" },
+    { bank:"Bank Mandiri", nomor:"0987654321", nama:"Raia Anindya Kirana" }
+  ],
+  alamatIntro: "Atau kirim hadiah ke alamat berikut:",
+  alamatKirim: "Jl. Melati Raya No. 21, Cirebon, Jawa Barat 45123",
+
+  // Kosongkan "" jika belum ada musik. Isi dengan link file .mp3
+  // (misal dari Google Drive / hosting lain) kalau sudah siap.
+  musikSrc: "",
+
+  penutup: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.",
+  hashtag: "#ArkaRaiaBersatu"
 };
 
-// HELPER RENDER (Otomatis tambahkan loading="lazy")
-function render(){
-  document.getElementById('hero-photo').src = DATA.fotoHero;
-  document.getElementById('hero-photo').loading = "lazy";
-  document.getElementById('groom-photo').src = DATA.fotoPria;
-  document.getElementById('groom-photo').loading = "lazy";
-  document.getElementById('bride-photo').src = DATA.fotoWanita;
-  document.getElementById('bride-photo').loading = "lazy";
-  
-  document.getElementById('gallery-grid').innerHTML = DATA.galeri.map(src => `<img src="${src}" loading="lazy" onclick="openLightbox('${src}')">`).join('');
+// ---------------------------------------------------------------------
+// RENDER — ambil isi dari DATA di atas, tampilkan ke halaman.
+// Setiap bagian dibungkus try/catch sendiri-sendiri supaya kalau ada
+// satu bagian data yang salah tulis, bagian lain tetap tampil normal.
+// ---------------------------------------------------------------------
+
+function isi(id, val){ var el=document.getElementById(id); if(el) el.textContent = val; }
+function fotoIsi(id, src, alt){ var el=document.getElementById(id); if(el){ el.src=src; if(alt) el.alt=alt; } }
+
+try {
+  fotoIsi('hero-photo', DATA.fotoHero);
+  isi('hero-names', ''); document.getElementById('hero-names').innerHTML = DATA.panggilanPria + '<br>&amp; ' + DATA.panggilanWanita;
+  isi('hero-quote', DATA.kutipanHero);
+} catch(e){ console.error('Render hero gagal:', e); }
+
+try {
+  var tgl = new Date(DATA.tanggalCountdown);
+  isi('countdown-date', tgl.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'}));
+} catch(e){ console.error('Render tanggal countdown gagal:', e); }
+
+try {
+  fotoIsi('groom-photo', DATA.fotoPria, DATA.namaPria);
+  isi('groom-name', DATA.namaPria);
+  isi('groom-parents', DATA.ortuPria);
+  fotoIsi('bride-photo', DATA.fotoWanita, DATA.namaWanita);
+  isi('bride-name', DATA.namaWanita);
+  isi('bride-parents', DATA.ortuWanita);
+} catch(e){ console.error('Render mempelai gagal:', e); }
+
+try {
+  var evWrap = document.getElementById('events-list');
+  evWrap.innerHTML = DATA.acara.map(function(ev){
+    return '<div class="card event-card">' +
+      '<p class="eyebrow">'+ev.nama+'</p>' +
+      '<p class="serif" style="font-size:1.3rem; margin:.5rem 0;">'+ev.tanggal+'</p>' +
+      '<p style="font-size:.85rem; color:var(--ink-soft);">'+ev.jam+'</p>' +
+      '<div class="hairline"></div>' +
+      '<p style="font-size:.88rem; font-weight:600;">'+ev.tempat+'</p>' +
+      '<p style="font-size:.82rem; color:var(--ink-soft); margin-bottom:.8rem;">'+ev.alamat+'</p>' +
+      '<a href="'+ev.linkMaps+'" target="_blank" rel="noopener" style="font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sage-deep); font-weight:700; text-decoration:none;">Lihat peta →</a>' +
+      '</div>';
+  }).join('');
+} catch(e){ console.error('Render acara gagal:', e); }
+
+try {
+  var stWrap = document.getElementById('story-list');
+  stWrap.innerHTML = DATA.ceritaCinta.map(function(s){
+    return '<div class="story-item">' +
+      '<div class="story-photo"><img src="'+s.foto+'" alt="'+s.judul+'"></div>' +
+      '<div>' +
+        '<p class="eyebrow">'+s.tahun+'</p>' +
+        '<h4 class="serif" style="font-size:1.4rem; margin:.4rem 0;">'+s.judul+'</h4>' +
+        '<p style="font-size:.88rem; color:var(--ink-soft); line-height:1.6;">'+s.teks+'</p>' +
+      '</div></div>';
+  }).join('');
+} catch(e){ console.error('Render love story gagal:', e); }
+
+try {
+  var galWrap = document.getElementById('gallery-grid');
+  galWrap.innerHTML = DATA.galeri.map(function(src, i){
+    return '<img src="'+src+'" alt="Galeri foto '+(i+1)+'" onclick="openLightbox(\''+src+'\')">';
+  }).join('');
+} catch(e){ console.error('Render galeri gagal:', e); }
+
+try {
+  isi('rsvp-deadline', 'Mohon konfirmasi sebelum ' + DATA.batasRsvp);
+} catch(e){ console.error('Render RSVP gagal:', e); }
+
+try {
+  isi('gift-intro', DATA.giftIntro);
+  var giftWrap = document.getElementById('gift-banks');
+  giftWrap.innerHTML = DATA.rekening.map(function(b, i){
+    return '<div class="card bank-card">' +
+      '<div>' +
+        '<p style="font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sage-deep); font-weight:700;">'+b.bank+'</p>' +
+        '<p class="serif" style="font-size:1.15rem; margin:.2rem 0;" id="acc-'+i+'">'+b.nomor+'</p>' +
+        '<p style="font-size:.75rem; color:var(--ink-soft);">a.n. '+b.nama+'</p>' +
+      '</div>' +
+      '<button type="button" class="copy-btn" onclick="salinRekening(this,\''+b.nomor+'\')">Salin</button>' +
+      '</div>';
+  }).join('');
+  isi('gift-address-intro', DATA.alamatIntro);
+  isi('gift-address', DATA.alamatKirim);
+} catch(e){ console.error('Render gift gagal:', e); }
+
+try {
+  document.getElementById('location-map').src = DATA.embedPeta;
+  document.getElementById('location-directions').href = DATA.linkPetaTombol;
+} catch(e){ console.error('Render lokasi gagal:', e); }
+
+try {
+  isi('closing-text', DATA.penutup);
+  isi('closing-signoff', 'Kami yang berbahagia,');
+  document.getElementById('closing-names').innerHTML = DATA.panggilanPria + ' &amp; ' + DATA.panggilanWanita;
+  isi('closing-hashtag', DATA.hashtag);
+} catch(e){ console.error('Render penutup gagal:', e); }
+
+try {
+  if(DATA.musikSrc){ document.getElementById('bg-audio').src = DATA.musikSrc; }
+  else { document.getElementById('music-btn').style.display = 'none'; }
+} catch(e){ console.error('Setup musik gagal:', e); }
+
+// ---------------------------------------------------------------------
+// COUNTDOWN BERJALAN
+// ---------------------------------------------------------------------
+try {
+  var target = new Date(DATA.tanggalCountdown).getTime();
+  function tickCountdown(){
+    var diff = Math.max(0, target - Date.now());
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    isi('c-days', String(d).padStart(2,'0'));
+    isi('c-hours', String(h).padStart(2,'0'));
+    isi('c-minutes', String(m).padStart(2,'0'));
+    isi('c-seconds', String(s).padStart(2,'0'));
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+} catch(e){ console.error('Countdown gagal jalan:', e); }
+
+// ---------------------------------------------------------------------
+// FUNGSI INTERAKTIF LAIN
+// ---------------------------------------------------------------------
+function salinRekening(btn, nomor){
+  navigator.clipboard.writeText(nomor).then(function(){
+    var asli = btn.textContent;
+    btn.textContent = 'Tersalin';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = asli; btn.classList.remove('copied'); }, 1800);
+  }).catch(function(){});
 }
-render();
+
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox').addEventListener('click', function(e){
+  if(e.target.id === 'lightbox') closeLightbox();
+});
 
 function sendRsvp(e){
   e.preventDefault();
-  var nama = document.getElementById('rsvp-name').value;
-  window.location.href = 'https://wa.me/'+DATA.nomorWhatsapp+'?text=Hadir, nama: '+nama;
+  var nama = document.getElementById('rsvp-name').value.trim();
+  var hadir = document.querySelector('input[name=attendance]:checked').value;
+  var tamu = document.getElementById('rsvp-guests').value;
+  var pesan = document.getElementById('rsvp-message').value.trim();
+  var lines = [
+    "Assalamu'alaikum, saya ingin konfirmasi kehadiran:",
+    "Nama: " + nama,
+    "Kehadiran: " + hadir,
+    "Jumlah tamu: " + tamu
+  ];
+  if(pesan) lines.push("Ucapan: " + pesan);
+  var text = encodeURIComponent(lines.join("\n"));
+  window.open('https://wa.me/' + DATA.nomorWhatsapp + '?text=' + text, '_blank');
   return false;
 }
 
-function openLightbox(src){ document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').classList.add('open'); }
-function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
+} catch(e) { console.error('Terjadi error saat memuat undangan:', e); }
 </script>
+
 </body>
 </html>
