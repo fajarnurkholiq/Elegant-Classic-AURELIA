@@ -1,3 +1,0 @@
-Taruh file musik latar di folder ini dengan nama: backsound.mp3
-(sesuai path yang diatur di js/data.js -> music.src)
-Format lain (mis. .ogg) juga bisa, tinggal ubah path di data.js.
